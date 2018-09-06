@@ -30,7 +30,7 @@ public class RequestsToBase {
      *
      * @throws SQLException, ClassNotFoundException
      */
-    void connect() throws ClassNotFoundException {
+    public void connect() throws ClassNotFoundException {
         try {
             Class.forName("com.mysql.jdbc.Driver");//требуется чтобы 
             /*
@@ -39,7 +39,7 @@ public class RequestsToBase {
                 загруженных классов, а не пытается загрузить их сам.
              */
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/report?useSSL=no&serverTimezone=UTC", "root", "123456");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/reports?useSSL=no&serverTimezone=UTC", "root", "123456");
             stmt = connection.createStatement();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -49,7 +49,7 @@ public class RequestsToBase {
     /**
      * Метод, отвечающий за отключение от БД
      */
-    void disconnect() {
+    public void disconnect() {
         try {
             connection.close();
         } catch (SQLException e) {
