@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Use and copying for commercial purposes
+ * only with the author's permission
  */
 package ru.kentyku.reportnet.reports;
 
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kentyku
  */
-public class UserForm extends HttpServlet {
+public class TakeAdminForm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +34,10 @@ public class UserForm extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserForm</title>");            
+            out.println("<title>Servlet TakeAdminForm</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserForm at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet TakeAdminForm at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
