@@ -12,6 +12,7 @@ import java.util.Date;
  * @author kentyku
  */
 public class Equipment {
+
     private String typeEquipment;
     private String regionEquipment;
     private String statusEquipment;
@@ -21,10 +22,10 @@ public class Equipment {
     private String numberRequest;
     private String personRequest;
     private String dateReport;
-    
-    public Equipment(){
+
+    public Equipment() {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
-        this.dateReport=formatForDateNow.format(new Date());
+        this.dateReport = formatForDateNow.format(new Date());
     }
 
     /**
@@ -38,7 +39,11 @@ public class Equipment {
      * @param typeEquipment the typeEquipment to set
      */
     public void setTypeEquipment(String typeEquipment) {
-        this.typeEquipment = typeEquipment;
+        if (typeEquipment == null) {
+            this.typeEquipment = "нет данных";
+        } else {
+            this.typeEquipment = typeEquipment;
+        }
     }
 
     /**
@@ -66,7 +71,11 @@ public class Equipment {
      * @param statusEquipment the statusEquipment to set
      */
     public void setStatusEquipment(String statusEquipment) {
-        this.statusEquipment = statusEquipment;
+        if (statusEquipment == null) {
+            this.statusEquipment = "нет данных";
+        } else {
+            this.statusEquipment = statusEquipment;
+        }
     }
 
     /**
@@ -80,7 +89,11 @@ public class Equipment {
      * @param statusPaper the statusPaper to set
      */
     public void setStatusPaper(String statusPaper) {
-        this.statusPaper = statusPaper;
+        if (statusPaper == null) {
+            this.statusPaper = "нет данных";
+        } else {
+            this.statusPaper = statusPaper;
+        }
     }
 
     /**
@@ -94,7 +107,11 @@ public class Equipment {
      * @param statusMoneyBox the statusMoneyBox to set
      */
     public void setStatusMoneyBox(String statusMoneyBox) {
-        this.statusMoneyBox = statusMoneyBox;
+        if (statusMoneyBox == null) {
+            this.statusMoneyBox = "нет данных";
+        } else {
+            this.statusMoneyBox = statusMoneyBox;
+        }
     }
 
     /**
@@ -108,7 +125,11 @@ public class Equipment {
      * @param dateRequest the dateRequest to set
      */
     public void setDateRequest(String dateRequest) {
-        this.dateRequest = dateRequest;
+        if (dateRequest.equals("")) {
+            this.dateRequest = "не введено";
+        } else {
+            this.dateRequest = dateRequest;
+        }
     }
 
     /**
@@ -122,7 +143,11 @@ public class Equipment {
      * @param numberRequest the numberRequest to set
      */
     public void setNumberRequest(String numberRequest) {
-        this.numberRequest = numberRequest;
+        if (numberRequest.equals("")) {
+            this.numberRequest = "не введено";
+        } else {
+            this.numberRequest = numberRequest;
+        }
     }
 
     /**
@@ -136,7 +161,11 @@ public class Equipment {
      * @param personRequest the personRequest to set
      */
     public void setPersonRequest(String personRequest) {
-        this.personRequest = personRequest;
+        if (personRequest.equals("")) {
+            this.personRequest = "не введено";
+        } else {
+            this.personRequest = personRequest;
+        }
     }
 
     /**
@@ -152,7 +181,5 @@ public class Equipment {
     public void setDateReport(String dateReport) {
         this.dateReport = dateReport;
     }
-    
-    
-    
+
 }

@@ -24,6 +24,7 @@ import ru.kentyku.reportnet.requests.RequestsToBase;
 public class TakeUserForm extends HttpServlet {
 
     RequestsToBase rtb = new RequestsToBase();
+    String isComplete="доставлен.";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,14 +55,16 @@ public class TakeUserForm extends HttpServlet {
         try {
             requestToBase.addReport(equipment);
         } catch (SQLException ex) {
+            isComplete="Проблемы с доставкой. Попробуйте позднее или"
+                    + " свяжитесь с адмнистратором";
             Logger.getLogger(TakeUserForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         System.out.println("REPORT:");
 //        System.out.println(equipment.getDateReport());
-        System.out.println(equipment.getDateRequest());
-        System.out.println(equipment.getNumberRequest());
-        System.out.println(equipment.getPersonRequest());
+        System.out.println("DateRequest="+equipment.getDateRequest());
+        System.out.println("NumberRequest="+equipment.getNumberRequest());
+        System.out.println("Person="+equipment.getPersonRequest());
         System.out.println(equipment.getRegionEquipment());
         System.out.println(equipment.getStatusEquipment());
         System.out.println(equipment.getStatusMoneyBox());
@@ -78,7 +81,7 @@ public class TakeUserForm extends HttpServlet {
             out.println("<title>Статус отчета</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Статус отчета: ******* </h1>");
+            out.println("<h1>Статус отчета: "+isComplete+" </h1>");
             out.println("</body>");
             out.println("</html>");
         }

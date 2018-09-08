@@ -82,7 +82,7 @@ public class RequestsToBase {
 //        }
 
     private void addReportQuery(Equipment item) throws SQLException {
-        System.out.println(item.getRegionEquipment()+"*******");
+        System.out.println(item.getRegionEquipment() + "*******");
 //        this.pstmt = connection.prepareStatement("insert into reports.report  \n"
 //                + "set \n"
 //                + "id_region=(select id_region from reports.region where region='?'),\n"
@@ -107,17 +107,27 @@ public class RequestsToBase {
 //                + "WHERE country RLIKE ? ORDER BY country "
 //                + "limit ?,5;");
 //        rs = pstmt.executeQuery();
+//        this.stmt.executeUpdate("insert into reports.report  "
+//                + "set "
+//                + "id_region=(select id_region from reports.region where region='" + item.getRegionEquipment() + "'),"
+//                + "id_equipment=(select id_equipment from reports.equipment where equipment_col='" + item.getTypeEquipment() + "'),"
+//                + "id_status_paper=(select id_status_paper from reports.statuspaper where status_paper_col='" + item.getStatusPaper() + "'),"
+//                + "id_status_money_box=(select id_status_money_box from reports.statusmoneybox where status_money_box_col='" + item.getStatusMoneyBox() + "'),"
+//                + "date_request='" + item.getDateRequest() + "',"
+//                + "number_request='" + item.getNumberRequest() + "',"
+//                + "name_person='" + item.getPersonRequest() + "',"
+//                + "date_rowl=DATE_FORMAT(now(), '%Y-%m-%d' );");
         this.stmt.executeUpdate("insert into reports.report  "
                 + "set "
                 + "id_region=(select id_region from reports.region where region='" + item.getRegionEquipment() + "'),"
                 + "id_equipment=(select id_equipment from reports.equipment where equipment_col='" + item.getTypeEquipment() + "'),"
+                +"id_status_equipment=(select id_status_equipment from reports.status_equipment where status_col='"+item.getStatusEquipment()+"'),"
                 + "id_status_paper=(select id_status_paper from reports.statuspaper where status_paper_col='" + item.getStatusPaper() + "'),"
                 + "id_status_money_box=(select id_status_money_box from reports.statusmoneybox where status_money_box_col='" + item.getStatusMoneyBox() + "'),"
                 + "date_request='" + item.getDateRequest() + "',"
                 + "number_request='" + item.getNumberRequest() + "',"
                 + "name_person='" + item.getPersonRequest() + "',"
                 + "date_rowl=DATE_FORMAT(now(), '%Y-%m-%d' );");
-
 
 //        this.stmt.executeUpdate("UPDATE `reports`.`report` SET `name_person`='Юрий' "
 //                + "WHERE `number`='14';");

@@ -11,6 +11,7 @@ only with the author's permission
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <h1>Отчет о состоянии оборудования</h1>
         <form action="TakeUserForm" method="post" >
             Ваше подразделение: <br>
             <select name="region" id="idRegion">
@@ -30,7 +31,7 @@ only with the author's permission
             <select name="statusEquipment" id="idStatusEquipment" size="3">
                 <option disabled>Статус оборудования</option>
                 <option value="неисправно">неисправно</option>
-                <option value="исправно">исправно</option>  
+                <option value="исправно">исправно</option> 
             </select>  
             <br>
             <br>
@@ -43,12 +44,14 @@ only with the author's permission
             <input type="radio" id="idStatusMoneyBox2" name="statusMoneyBox"  value="немного есть" /> Место почти закончилось<br/>
             <input type="radio" id="idStatusMoneyBox3" name="statusMoneyBox"  value="достаточно" /> Места достаточно<br/>
 
+            <br>Если подавали заявку, укажите дату и номер заявки:<br>
             <br>
-            Дата заявки <input name="dateRequest" id="idNameRequest" type="text" size="10">
+            Дата заявки <input name="dateRequest" id="idNameRequest" type="text" size="10" >
 
-            Номер заявки <input name="numberRequest" id="idNumperRequest" type="text" size="10">
-
-            ФИО передавшего заявку <input name="person" id="idPerson" type="text" size="100">
+            Номер заявки <input name="numberRequest" id="idNumperRequest" type="text" size="20">
+            <br>
+            <br>
+            ФИО передавшего отчет: <input name="person" id="idPerson" type="text" size="100">
             <br>
             <br>
             <input type="submit" value="Отправить отчет">
