@@ -4,6 +4,9 @@
  */
 package ru.kentyku.reportnet.requests;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author kentyku
@@ -15,9 +18,14 @@ public class Equipment {
     private String statusPaper;
     private String statusMoneyBox;
     private String dateRequest;
-    private Integer numberRequest;
+    private String numberRequest;
     private String personRequest;
     private String dateReport;
+    
+    public Equipment(){
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
+        this.dateReport=formatForDateNow.format(new Date());
+    }
 
     /**
      * @return the typeEquipment
@@ -106,14 +114,14 @@ public class Equipment {
     /**
      * @return the numberRequest
      */
-    public Integer getNumberRequest() {
+    public String getNumberRequest() {
         return numberRequest;
     }
 
     /**
      * @param numberRequest the numberRequest to set
      */
-    public void setNumberRequest(Integer numberRequest) {
+    public void setNumberRequest(String numberRequest) {
         this.numberRequest = numberRequest;
     }
 

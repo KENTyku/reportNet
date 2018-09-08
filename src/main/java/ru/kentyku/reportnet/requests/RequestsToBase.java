@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  *
@@ -24,6 +25,7 @@ public class RequestsToBase {
     Connection connection;
     ResultSet rs;
     ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
+    Equipment equipment = new Equipment();
 
     /**
      * Метод, отвечающий за подключение к БД
@@ -39,7 +41,15 @@ public class RequestsToBase {
                 загруженных классов, а не пытается загрузить их сам.
              */
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/reports?useSSL=no&serverTimezone=UTC", "root", "123456");
+            Properties properties = new Properties();
+            properties.setProperty("user", "root");
+            properties.setProperty("password", "123456");
+            properties.setProperty("serverTimezone", "UTC");
+            properties.setProperty("characterEncoding", "UTF-8");
+            properties.setProperty("useSSL", "no");
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/reports", properties);
+//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/reports?useSSL=no&useUnicode=true&serverTimezone=UTC", "root", "123456");
             stmt = connection.createStatement();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -72,16 +82,52 @@ public class RequestsToBase {
 //        }
 
     private void addReportQuery(Equipment item) throws SQLException {
-        this.stmt.executeUpdate("INSERT INTO PAGES (URL, SITE_ID, FOUND)"
-                + " VALUES ('" + item.getDateReport() + "','" + item.getDateRequest()
-                + "','" + item.getRegionEquipment() + "')");
+        System.out.println(item.getRegionEquipment()+"*******");
+//        this.pstmt = connection.prepareStatement("insert into reports.report  \n"
+//                + "set \n"
+//                + "id_region=(select id_region from reports.region where region='?'),\n"
+//                + "id_equipment=(select id_equipment from reports.equipment where equipment_col='?'),\n"
+//                + "id_status_paper=(select id_status_paper from reports.statuspaper where status_paper_col='?'),\n"
+//                + "id_status_money_box=(select id_status_money_box from reports.statusmoneybox where status_money_box_col='?'),\n"
+//                + "date_request='?',\n"
+//                + "number_request='?',\n"
+//                + "name_person='?',\n"
+//                + "date_rowl=DATE_FORMAT(now(), '%Y-%m-%d' );");
+//        pstmt.setString(1, item.getRegionEquipment());
+//        pstmt.setString(2, item.getTypeEquipment());
+//        pstmt.setString(3, item.getStatusPaper());
+//        pstmt.setString(4, item.getStatusMoneyBox());
+//        pstmt.setString(5, item.getDateRequest());
+//        pstmt.setString(6, item.getNumberRequest());
+//        pstmt.setString(7, item.getPersonRequest());
+//        pstmt.executeUpdate();
+
+        //        this.pstmt = connection.prepareStatement("SELECT  city FROM country "
+//                + "INNER JOIN city on country.idcountry=city.idcountry "
+//                + "WHERE country RLIKE ? ORDER BY country "
+//                + "limit ?,5;");
+//        rs = pstmt.executeQuery();
+        this.stmt.executeUpdate("insert into reports.report  "
+                + "set "
+                + "id_region=(select id_region from reports.region where region='" + item.getRegionEquipment() + "'),"
+                + "id_equipment=(select id_equipment from reports.equipment where equipment_col='" + item.getTypeEquipment() + "'),"
+                + "id_status_paper=(select id_status_paper from reports.statuspaper where status_paper_col='" + item.getStatusPaper() + "'),"
+                + "id_status_money_box=(select id_status_money_box from reports.statusmoneybox where status_money_box_col='" + item.getStatusMoneyBox() + "'),"
+                + "date_request='" + item.getDateRequest() + "',"
+                + "number_request='" + item.getNumberRequest() + "',"
+                + "name_person='" + item.getPersonRequest() + "',"
+                + "date_rowl=DATE_FORMAT(now(), '%Y-%m-%d' );");
+
+
+//        this.stmt.executeUpdate("UPDATE `reports`.`report` SET `name_person`='Юрий' "
+//                + "WHERE `number`='14';");
     }
 
-    public ArrayList<Equipment> addReport(Equipment item) throws ClassNotFoundException, SQLException {
+    public void addReport(Equipment item) throws ClassNotFoundException, SQLException {
         connect();
         addReportQuery(item);
         disconnect();
-        return equipmentList;
+
     }
 
     /**

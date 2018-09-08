@@ -6,42 +6,49 @@ only with the author's permission
 
 <html>
     <head>
-        <title>UserForm</title>
+        <title>Отчет о состоянии оборудования</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <form action="TakeUserForm" method="post">
+        <form action="TakeUserForm" method="post" >
             Ваше подразделение: <br>
             <select name="region" id="idRegion">
                 <option disabled>Позразделение</option>
-                <option value="Алнаши">Алнаши</option>
-                <option value="Балезино">Балезино</option>  
-
+                <option value="Ижевск">Ижевск</option>
+                <option value="Можга">Можга</option>  
             </select>  
             <br>
-            <br>
-            <select name="equipment" id="idEquipment" size="3" >
+            <br>            
+            <select name="typeequipment" id="idTypeEquipment" size="3" >
                 <option disabled>Тип оборудования</option>
-                <option value="terminal">Терминал</option>
-                <option value="cashMachine">Банкомат</option>                
+                <option value="терминал">терминал</option>
+                <option value="банкомат">банкомат</option>                
             </select>  
             <br>
-            <br>  Состояние ленты :<br>             
-            <input type="radio" id="idStatusPaper1" name="statusPaper"  value="finished" /> Лента для чеков закончилась<br/>
-            <input type="radio" id="idStatusPaper2" name="statusPaper"  value="almostFinished" /> Лента для чеков  почти закончилась<br/>
-            <input type="radio" id="idStatusPaper3" name="statusPaper"  value="veryMuch" /> Ленты достаточно<br/>
+            <br>
+            <select name="statusEquipment" id="idStatusEquipment" size="3">
+                <option disabled>Статус оборудования</option>
+                <option value="неисправно">неисправно</option>
+                <option value="исправно">исправно</option>  
+            </select>  
+            <br>
+            <br>
+            Состояние ленты :<br>             
+            <input type="radio" id="idStatusPaper1" name="statusPaper"  value="закончилась" /> Лента для чеков закончилась<br/>
+            <input type="radio" id="idStatusPaper2" name="statusPaper"  value="немного" /> Лента для чеков  почти закончилась<br/>
+            <input type="radio" id="idStatusPaper3" name="statusPaper"  value="достаточно" /> Ленты достаточно<br/>
             <br>  Состояние купюроприёмника :<br>             
-            <input type="radio" id="idStatusMoneyBox1" name="statusMoneyBox"  value="finished" /> Место закончилось<br/>
-            <input type="radio" id="idStatusMoneyBox2" name="statusMoneyBox"  value="almostFinished" /> Место почти закончилось<br/>
-            <input type="radio" id="idStatusMoneyBox3" name="statusMoneyBox"  value="veryMuch" /> Места достаточно<br/>
-            
+            <input type="radio" id="idStatusMoneyBox1" name="statusMoneyBox"  value="нет места" /> Место закончилось<br/>
+            <input type="radio" id="idStatusMoneyBox2" name="statusMoneyBox"  value="немного есть" /> Место почти закончилось<br/>
+            <input type="radio" id="idStatusMoneyBox3" name="statusMoneyBox"  value="достаточно" /> Места достаточно<br/>
+
             <br>
             Дата заявки <input name="dateRequest" id="idNameRequest" type="text" size="10">
-            
-              Номер заявки <input name="numberRequest" id="idNumperRequest" type="text" size="10">
-           
-              ФИО передавшего заявку <input name="person" id="idPerson" type="text" size="100">
+
+            Номер заявки <input name="numberRequest" id="idNumperRequest" type="text" size="10">
+
+            ФИО передавшего заявку <input name="person" id="idPerson" type="text" size="100">
             <br>
             <br>
             <input type="submit" value="Отправить отчет">
