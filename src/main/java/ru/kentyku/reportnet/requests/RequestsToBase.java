@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -65,21 +66,6 @@ public class RequestsToBase {
         } catch (SQLException e) {
         }
     }
-//     void showAllListRequest() throws SQLException {
-//        this.pstmt = connection.prepareStatement("SELECT  city FROM country "
-//                + "INNER JOIN city on country.idcountry=city.idcountry "
-//                + "WHERE country RLIKE ? ORDER BY country "
-//                + "limit ?,5;");
-//        pstmt.setString(1, request);
-//        pstmt.setInt(2, index);
-//        rs = pstmt.executeQuery();
-//        //обрабатываем результат запроса
-//        this.cities.clear();
-//        while (this.rs.next()) {
-//            city = new City();
-//            city.setNameCity(this.rs.getString(1));
-//            this.cities.add(city);
-//        }
 
     private void addReportQuery(Equipment item) throws SQLException {
         System.out.println(item.getRegionEquipment() + "*******");
@@ -121,7 +107,7 @@ public class RequestsToBase {
                 + "set "
                 + "id_region=(select id_region from reports.region where region='" + item.getRegionEquipment() + "'),"
                 + "id_equipment=(select id_equipment from reports.equipment where equipment_col='" + item.getTypeEquipment() + "'),"
-                +"id_status_equipment=(select id_status_equipment from reports.status_equipment where status_col='"+item.getStatusEquipment()+"'),"
+                + "id_status_equipment=(select id_status_equipment from reports.status_equipment where status_col='" + item.getStatusEquipment() + "'),"
                 + "id_status_paper=(select id_status_paper from reports.statuspaper where status_paper_col='" + item.getStatusPaper() + "'),"
                 + "id_status_money_box=(select id_status_money_box from reports.statusmoneybox where status_money_box_col='" + item.getStatusMoneyBox() + "'),"
                 + "date_request='" + item.getDateRequest() + "',"
@@ -145,22 +131,79 @@ public class RequestsToBase {
      *
      * @throws Exception
      */
-    void showAllListRequest() throws SQLException {
-        rs = stmt.executeQuery("SELECT country FROM country ORDER BY country;");
-        while (rs.next()) {
-            Equipment equipment = new Equipment();
-            equipment.setRegionEquipment(rs.getString(1));
-            equipment.setTypeEquipment(rs.getString(2));
-            equipmentList.add(equipment);
-
+//    ArrayList<String> showAllListRequest() throws SQLException {
+//        ArrayList<String> list = new ArrayList<String>();
+//        rs = stmt.executeQuery("SELECT country FROM country ORDER BY country;");
+//        while (rs.next()) {
+//            Equipment equipment = new Equipment();
+//            equipment.setRegionEquipment(rs.getString(1));
+//            equipment.setTypeEquipment(rs.getString(2));
+//            equipmentList.add(equipment);
+//
+//        }
+    ArrayList<String> showAllListRequest() throws SQLException {
+        ArrayList<String> list = new ArrayList<String>();
+        this.pstmt = connection.prepareStatement("SELECT "
+                + "report.number, "
+                + "report.date_rowl,"
+                + "region.id_region,"
+                + "region.region,"
+                + "equipment.equipment_col,"
+                + "status_equipment.status_col,"
+                + "statuspaper.status_paper_col,"
+                + "statusmoneybox.status_money_box_col,"
+                + "report.date_request,"
+                + "report.number_request,"
+                + "report.name_person "
+                + "FROM reports.report "
+                + "inner join region on report.id_region=region.id_region "
+                + "inner join equipment on report.id_equipment=equipment.id_equipment "
+                + "inner join status_equipment on report.id_status_equipment=status_equipment.id_status_equipment "
+                + "inner join statuspaper on report.id_status_paper=statuspaper.id_status_paper "
+                + "inner join statusmoneybox on report.id_status_money_box=statusmoneybox.id_status_money_box LIMIT 100;");
+//        pstmt.setString(1, request);
+//        pstmt.setInt(2, index);
+        rs = pstmt.executeQuery();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+        //собираем строку заголовков столбцов
+        ArrayList<String> nameColums = new ArrayList<String>();
+        for (int i = 1; i < columnCount + 1; i++) {
+            String nameitem = rsmd.getColumnName(i);
+            nameColums.add(nameitem);
         }
+        String str = "";
+        for (String item : nameColums) {
+            str = str.concat(item + ";");
+        }
+        str = str.substring(0, str.length() - 1) + "\r\n";
+        //добавляем строку заголовков столбцов список
+        list.add(str);
+        //продолжаем собирать уже данные        
+        while (rs.next()) {
+            String itemString = "";
+            for (int i = 1; i < columnCount + 1; i++) {
+               itemString =itemString.concat(rs.getString(columnCount) + ";");               
+            }
+            
+            list.add( itemString + "\r\n");
+        }     
+        //обрабатываем результат запроса
+//        this.cities.clear();
+//        while (this.rs.next()) {
+//            city = new City();
+//            city.setNameCity(this.rs.getString(1));
+//            this.cities.add(city);
+//        }
+        return list;
     }
 
-    public ArrayList<Equipment> showAllList() throws ClassNotFoundException, SQLException {
+    public ArrayList<String> showAllList() throws ClassNotFoundException, SQLException {
+        ArrayList<String> list = new ArrayList<String>();
         connect();
-        showAllListRequest();
+        list = showAllListRequest();
         disconnect();
-        return equipmentList;
+        return list;
     }
 
 }
