@@ -88,21 +88,6 @@ public class RequestsToBase {
 //        pstmt.setString(7, item.getPersonRequest());
 //        pstmt.executeUpdate();
 
-        //        this.pstmt = connection.prepareStatement("SELECT  city FROM country "
-//                + "INNER JOIN city on country.idcountry=city.idcountry "
-//                + "WHERE country RLIKE ? ORDER BY country "
-//                + "limit ?,5;");
-//        rs = pstmt.executeQuery();
-//        this.stmt.executeUpdate("insert into reports.report  "
-//                + "set "
-//                + "id_region=(select id_region from reports.region where region='" + item.getRegionEquipment() + "'),"
-//                + "id_equipment=(select id_equipment from reports.equipment where equipment_col='" + item.getTypeEquipment() + "'),"
-//                + "id_status_paper=(select id_status_paper from reports.statuspaper where status_paper_col='" + item.getStatusPaper() + "'),"
-//                + "id_status_money_box=(select id_status_money_box from reports.statusmoneybox where status_money_box_col='" + item.getStatusMoneyBox() + "'),"
-//                + "date_request='" + item.getDateRequest() + "',"
-//                + "number_request='" + item.getNumberRequest() + "',"
-//                + "name_person='" + item.getPersonRequest() + "',"
-//                + "date_rowl=DATE_FORMAT(now(), '%Y-%m-%d' );");
         this.stmt.executeUpdate("insert into reports.report  "
                 + "set "
                 + "id_region=(select id_region from reports.region where region='" + item.getRegionEquipment() + "'),"
@@ -131,16 +116,6 @@ public class RequestsToBase {
      *
      * @throws Exception
      */
-//    ArrayList<String> showAllListRequest() throws SQLException {
-//        ArrayList<String> list = new ArrayList<String>();
-//        rs = stmt.executeQuery("SELECT country FROM country ORDER BY country;");
-//        while (rs.next()) {
-//            Equipment equipment = new Equipment();
-//            equipment.setRegionEquipment(rs.getString(1));
-//            equipment.setTypeEquipment(rs.getString(2));
-//            equipmentList.add(equipment);
-//
-//        }
     ArrayList<String> showAllListRequest() throws SQLException {
         ArrayList<String> list = new ArrayList<String>();
         this.pstmt = connection.prepareStatement("SELECT "
@@ -169,7 +144,8 @@ public class RequestsToBase {
         //собираем строку заголовков столбцов
         ArrayList<String> nameColums = new ArrayList<String>();
         for (int i = 1; i < columnCount + 1; i++) {
-            String nameitem = rsmd.getColumnName(i);
+            String nameitem = rsmd.getColumnLabel(i);
+//            System.out.println(rsmd.getColumnLabel(i));
             nameColums.add(nameitem);
         }
         String str = "";
@@ -183,18 +159,11 @@ public class RequestsToBase {
         while (rs.next()) {
             String itemString = "";
             for (int i = 1; i < columnCount + 1; i++) {
-               itemString =itemString.concat(rs.getString(columnCount) + ";");               
+                itemString = itemString.concat(rs.getString(i) + ";");
             }
-            
-            list.add( itemString + "\r\n");
-        }     
-        //обрабатываем результат запроса
-//        this.cities.clear();
-//        while (this.rs.next()) {
-//            city = new City();
-//            city.setNameCity(this.rs.getString(1));
-//            this.cities.add(city);
-//        }
+
+            list.add(itemString + "\r\n");
+        }
         return list;
     }
 

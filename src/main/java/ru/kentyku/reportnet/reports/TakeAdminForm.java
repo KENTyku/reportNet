@@ -43,20 +43,20 @@ public class TakeAdminForm extends HttpServlet {
             addLink = request.getParameter("addLink");
             if (addLink.equals("addLink")) {
                 saveList();
-                generateLink();
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Ссылка на отчет</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<div align=\"center\"><h1>Кликните на ссылку, чтобы скачать отчет:</h1>");
+                out.println("<br><h2>");
+                out.println(generateLink());
+                out.println("</h2></div>");
+                out.println("</body>");
+                out.println("</html>");
             }
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Ссылка на отчет</title>");
-            out.println("</head>");
-            out.println("<body>");
 
-            out.println("<h1>Кликните на ссылку, чтобы скачать отчет:</h1>");
-            out.println("<br>");
-            out.println(request.getParameter("addLink"));
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
@@ -112,22 +112,28 @@ public class TakeAdminForm extends HttpServlet {
     }// </editor-fold>
 
     void saveList() throws SQLException, ClassNotFoundException {
-        RequestsToBase requestDB=new RequestsToBase();       
-        ArrayList<String> list =requestDB.showAllList();        
+        RequestsToBase requestDB = new RequestsToBase();
+        ArrayList<String> list = requestDB.showAllList();
+        for (String item : list) {
+            System.out.println(item);
+        }
+
         String filename = "report";//имя файла
         try {
-            FileWriter fwriter = new FileWriter(filename + ".csv", false);
+            FileWriter fwriter = new FileWriter("D:\\Мои документы\\NetBeansProjects\\apache-tomcat-8.5.29\\webapps\\test\\" + filename + ".csv", false);
             for (String item : list) {
                 fwriter.write(item);
             }
             fwriter.flush();
             fwriter.close();
+            System.out.println("********Запись файла прошла успешно");
         } catch (IOException ex) {
             System.out.println("Ошибка записи!\n" + ex.getMessage());
         }
     }
 
-    void generateLink() {
-
+    String generateLink() {
+        String link = "<a href=\\test\\report.csv > Скачать общий отчет за все время </a>";
+        return link;
     }
 }
