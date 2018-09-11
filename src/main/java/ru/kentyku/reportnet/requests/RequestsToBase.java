@@ -44,7 +44,7 @@ public class RequestsToBase {
 
             Properties properties = new Properties();
             properties.setProperty("user", "root");
-            properties.setProperty("password", "123456");
+            properties.setProperty("password", "Txfjq123");
             properties.setProperty("serverTimezone", "UTC");
             properties.setProperty("characterEncoding", "UTF-8");
             properties.setProperty("useSSL", "no");

@@ -114,13 +114,13 @@ public class TakeAdminForm extends HttpServlet {
     void saveList() throws SQLException, ClassNotFoundException {
         RequestsToBase requestDB = new RequestsToBase();
         ArrayList<String> list = requestDB.showAllList();
-        for (String item : list) {
-            System.out.println(item);
-        }
+//        for (String item : list) {
+//            System.out.println(item);
+//        }
 
         String filename = "report";//имя файла
         try {
-            FileWriter fwriter = new FileWriter("D:\\Мои документы\\NetBeansProjects\\apache-tomcat-8.5.29\\webapps\\test\\" + filename + ".csv", false);
+            FileWriter fwriter = new FileWriter("C:\\Program Files\\Apache Software Foundation\\Apache Tomcat 8.0.27\\webapps\\manager\\files\\" + filename + ".csv", false);
             for (String item : list) {
                 fwriter.write(item);
             }
@@ -133,7 +133,7 @@ public class TakeAdminForm extends HttpServlet {
     }
 
     String generateLink() {
-        String link = "<a href=\\test\\report.csv > Скачать общий отчет за все время </a>";
+        String link = "<a href=\\manager\\files\\report.csv > Скачать общий отчет за все время </a>";
         return link;
     }
 }

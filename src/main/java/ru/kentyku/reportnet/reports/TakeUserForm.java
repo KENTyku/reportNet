@@ -83,6 +83,11 @@ public class TakeUserForm extends HttpServlet {
             out.println("<br>");
             out.println("<br>");
             out.println("<h2 align=\"center\">" + isComplete + "</h2>");
+            out.println("<br>");
+            out.println("<br>");
+            out.println("<h2 align=\"center\">");
+            out.println("<a href=AdminForm.html > Скачать общий отчет за все время </a>");
+            out.println("</h2>");
             out.println("</body>");
             out.println("</html>");
         }
