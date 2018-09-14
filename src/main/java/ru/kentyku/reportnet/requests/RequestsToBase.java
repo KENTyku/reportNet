@@ -43,13 +43,13 @@ public class RequestsToBase {
              */
 
             Properties properties = new Properties();
-            properties.setProperty("user", "root");
+            properties.setProperty("user", "admin");
             properties.setProperty("password", "Txfjq123");
             properties.setProperty("serverTimezone", "UTC");
             properties.setProperty("characterEncoding", "UTF-8");
             properties.setProperty("useSSL", "no");
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/reports", properties);
+            connection = DriverManager.getConnection("jdbc:mysql://10.18.1.110:3306/reports", properties);
 //            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/reports?useSSL=no&useUnicode=true&serverTimezone=UTC", "root", "123456");
             stmt = connection.createStatement();
         } catch (SQLException ex) {
@@ -98,7 +98,8 @@ public class RequestsToBase {
                 + "date_request='" + item.getDateRequest() + "',"
                 + "number_request='" + item.getNumberRequest() + "',"
                 + "name_person='" + item.getPersonRequest() + "',"
-                + "date_rowl=DATE_FORMAT(now(), '%Y-%m-%d' );");
+                + "date_rowl=DATE_FORMAT(now(), '%Y-%m-%d' ),"
+                + "report.comment='" + item.getComment() + "';");
 
 //        this.stmt.executeUpdate("UPDATE `reports`.`report` SET `name_person`='Юрий' "
 //                + "WHERE `number`='14';");
@@ -129,13 +130,15 @@ public class RequestsToBase {
                 + "statusmoneybox.status_money_box_col,"
                 + "report.date_request,"
                 + "report.number_request,"
-                + "report.name_person "
+                + "report.name_person,"
+                + "report.comment "
                 + "FROM reports.report "
                 + "inner join region on report.id_region=region.id_region "
                 + "inner join equipment on report.id_equipment=equipment.id_equipment "
                 + "inner join status_equipment on report.id_status_equipment=status_equipment.id_status_equipment "
                 + "inner join statuspaper on report.id_status_paper=statuspaper.id_status_paper "
-                + "inner join statusmoneybox on report.id_status_money_box=statusmoneybox.id_status_money_box LIMIT 100;");
+                + "inner join statusmoneybox on report.id_status_money_box=statusmoneybox.id_status_money_box "
+                + "order by report.number limit 100;");
 //        pstmt.setString(1, request);
 //        pstmt.setInt(2, index);
         rs = pstmt.executeQuery();

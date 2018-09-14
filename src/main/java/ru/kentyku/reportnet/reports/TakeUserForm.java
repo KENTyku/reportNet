@@ -50,13 +50,14 @@ public class TakeUserForm extends HttpServlet {
         equipment.setStatusMoneyBox(request.getParameter("statusMoneyBox"));
         equipment.setStatusPaper(request.getParameter("statusPaper"));
         equipment.setTypeEquipment(request.getParameter("typeequipment"));
+        equipment.setComment(request.getParameter("comment"));
 
         RequestsToBase requestToBase = new RequestsToBase();
         try {
             requestToBase.addReport(equipment);
         } catch (SQLException ex) {
             isComplete = "Проблемы с доставкой. Попробуйте позднее или"
-                    + " свяжитесь с адмнистратором";
+                    + " свяжитесь с адмнистратором. Лог ошибки: "+ex.getMessage();
             Logger.getLogger(TakeUserForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        System.out.println("REPORT:");

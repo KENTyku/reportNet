@@ -16,8 +16,37 @@ only with the author's permission
             Ваше подразделение: <br>
             <select name="region" id="idRegion">
                 <option disabled>Позразделение</option>
-                <option value="Ижевск">Ижевск</option>
-                <option value="Можга">Можга</option>  
+                <!--<option value="Ижевск">Региональный центр урегулирования убытков</option>-->
+                <option value="Дирекция">Дирекция</option>
+                <option value="СО Индустриальный в г.Ижевск">СО "Индустриальный" в г.Ижевск</option>
+<!--                <option value="СО Ленинский в г. Ижевск">СО "Ленинский" в г. Ижевск</option>-->
+                <option value="СО Октябрьский в г.Ижевск">СО "Октябрьский" в г.Ижевск</option>
+                <option value="СО Устиновский в г.Ижевск">СО "Устиновский" в г.Ижевск</option>
+                <option value="СО имени Мансура Акбарова в г. Ижевск">СО имени Мансура Акбарова в г. Ижевск</option>
+                <option value="СО в г.Алнаши">СО в г.Алнаши</option>
+                <option value="СО в г.Воткинск">СО в г.Воткинск</option>
+                <option value="СО в г.Глазов">СО в г.Глазов</option>
+                <option value="СО в г.Камбарка">СО в г.Камбарка</option>
+                <option value="СО в г.Можга">СО в г.Можга</option>
+                <option value="СО в г.Сарапул">СО в г.Сарапул</option>
+                <option value="СО в п. Игра">СО в п. Игра</option>
+                <option value="СО в п. Ува">СО в п. Ува</option>
+                <option value="СО в п.Балезино">СО в п.Балезино</option>
+                <option value="СО в п.Кез">СО в п.Кез</option>
+                <!--<option value="СО в п.Селты">СО в п.Селты</option>-->
+                <option value="СО в п.Яр">СО в п.Яр</option>
+                <option value="СО в с.Вавож">СО в с.Вавож</option>
+                <!--<option value="СО в с.Грахово">СО в с.Грахово</option>-->
+                <option value="СО в с.Дебесы">СО в с.Дебесы</option>
+                <option value="СО в с.Завьялово">СО в с.Завьялово</option>
+                <!--<option value="СО в с.Каракулино">СО в с.Каракулино</option>-->
+                <option value="СО в с.Кизнер">СО в с.Кизнер</option>
+                <!--<option value="СО в с.Киясово">СО в с.Киясово</option>-->
+<!--                <option value="СО в с.Красногорское">СО в с.Красногорское</option>-->
+                <option value="СО в с.М.Пурга">СО в с.М.Пурга</option>
+                <option value="СО в с.Сюмси">СО в с.Сюмси</option>
+                <option value="СО в с.Шаркан">СО в с.Шаркан</option>                
+                <option value="СО в с.Якшур-Бодья">СО в с.Якшур-Бодья</option>    
             </select>  
             <br>
             <br>            
@@ -46,12 +75,16 @@ only with the author's permission
 
             <br>Если подавали заявку, укажите дату и номер заявки:<br>
             <br>
-            Дата заявки <input name="dateRequest" id="idNameRequest" type="text" size="10" >
+            Дата заявки <input name="dateRequest" id="idNameRequest" type="text" size="10" maxlength="10"/>
 
-            Номер заявки <input name="numberRequest" id="idNumperRequest" type="text" size="20">
+            Номер заявки <input name="numberRequest" id="idNumperRequest" type="text" size="20" maxlength="20"/>
             <br>
             <br>
-            ФИО передавшего отчет: <input name="person" id="idPerson" type="text" size="100">
+            Комментарии:<br>
+            <textarea name="comment" id="idComment" rows="5" cols="100" maxlength=400></textarea>
+            <br>
+            <br>
+            ФИО передавшего отчет: <input name="person" id="idPerson" type="text" size="100" maxlength="100"/>
             <br>
             <br>
             <input type="submit" value="Отправить отчет">

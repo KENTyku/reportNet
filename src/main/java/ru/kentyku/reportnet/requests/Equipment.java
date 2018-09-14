@@ -22,6 +22,7 @@ public class Equipment {
     private String numberRequest;
     private String personRequest;
     private String dateReport;
+    private String comment;
 
     public Equipment() {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
@@ -180,6 +181,20 @@ public class Equipment {
      */
     public void setDateReport(String dateReport) {
         this.dateReport = dateReport;
+    }
+
+    /**
+     * @return the comment
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * @param comment the comment to set
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 }
