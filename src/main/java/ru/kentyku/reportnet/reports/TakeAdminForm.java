@@ -120,8 +120,8 @@ public class TakeAdminForm extends HttpServlet {
 
         String filename = "report";//имя файла
         try {
-            FileWriter fwriter = new FileWriter("C:\\Program Files\\Apache Software Foundation\\Apache Tomcat 8.0.27\\webapps\\manager\\files\\" + filename + ".csv", false);
-//            FileWriter fwriter = new FileWriter("C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\reportNet-1.0-SNAPSHOT\\" + filename + ".csv", false);//для боевого
+//            FileWriter fwriter = new FileWriter("C:\\Program Files\\Apache Software Foundation\\Apache Tomcat 8.0.27\\webapps\\manager\\files\\" + filename + ".csv", false);
+            FileWriter fwriter = new FileWriter("C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\reportNet-1.0-SNAPSHOT\\" + filename + ".csv", false);//для боевого
             for (String item : list) {
                 fwriter.write(item);
             }
@@ -134,8 +134,8 @@ public class TakeAdminForm extends HttpServlet {
     }
 
     String generateLink() {
-        String link = "<a href=\\manager\\files\\report.csv > Скачать</a>";
-//        String link = "<a href=\\reportNet-1.0-SNAPSHOT\\report.csv > Скачать общий отчет за все время </a>";//для боевого
+//        String link = "<a href=\\manager\\files\\report.csv > Скачать</a>";
+        String link = "<a href=\\reportNet-1.0-SNAPSHOT\\report.csv > Скачать </a>";//для боевого
         return link;
     }
 }

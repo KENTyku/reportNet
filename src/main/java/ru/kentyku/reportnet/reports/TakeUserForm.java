@@ -59,6 +59,7 @@ public class TakeUserForm extends HttpServlet {
             isComplete = "Проблемы с доставкой. Попробуйте позднее или"
                     + " свяжитесь с адмнистратором. Лог ошибки: "+ex.getMessage();
             Logger.getLogger(TakeUserForm.class.getName()).log(Level.SEVERE, null, ex);
+            requestToBase.disconnect();
         }
 //        System.out.println("REPORT:");
 //        System.out.println("DateRequest=" + equipment.getDateRequest());
